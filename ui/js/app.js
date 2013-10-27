@@ -51,7 +51,7 @@ function openEvent(date,title) {
 }
 
 function GetBaseUrl() {
-//	return "http://globalengage.co.nf/hangouts/";
-	return "http://test.lifeparticipation.org/globalengage/hangouts/";
+	return "http://globalengage.co.nf/hangouts/";
+	//return "http://test.lifeparticipation.org/globalengage/hangouts/";
 }
 
