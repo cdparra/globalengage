@@ -30,10 +30,10 @@ function openEvent(date,title) {
 	    type: "GET",
 	    url: GetBaseUrl() + date+"-"+title+".json",
            	//url: "http://test.reminiscens.me/lifeapi/context/person/"+GetPersonId(),
-			//beforeSend: function (request)
-	    	//{
-	    	//request.setRequestHeader("PLAY_SESSION", GetSessionKey());
-	    	//},
+//			beforeSend: function (request)
+//	    	{
+//	    	   request.setRequestHeader("PLAY_SESSION", GetSessionKey());
+//	    	},
             processData: false,
             dataType: "json",
 			contentType:"application/json",
@@ -51,6 +51,7 @@ function openEvent(date,title) {
 }
 
 function GetBaseUrl() {
-	return "http://globalengage.co.nf/hangouts/";
+//	return "http://globalengage.co.nf/hangouts/";
+	return "http://test.lifeparticipation.org/hangouts/";
 }
 
