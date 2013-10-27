@@ -40,8 +40,6 @@ cellspacing="2">
 </table>
 <br>
 
-<!-- HO -->
-<script>
 
 <!-- The hangout API JavaScript. Always include this first -->
 <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
@@ -83,6 +81,10 @@ function hangoutURL() {
   http.send(data);
 }
 
+
+<!-- HO -->
+<script>
+
 -->
 
 function init() {
@@ -94,6 +96,8 @@ function init() {
         }
       });
 }
+
+</script>
 
 <!-- 
 
@@ -125,8 +129,6 @@ function init() {
 <div style="clear: both;"></div>
 
 -->
-
-</script>
 
 ]]></Content>
 </Module>
