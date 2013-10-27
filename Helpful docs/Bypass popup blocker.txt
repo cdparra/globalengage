@@ -1,0 +1,5 @@
+StackOverflow:
+http://stackoverflow.com/questions/9514698/bypass-popup-blocker-on-window-open-when-jquery-event-preventdefault-is-set
+
+More streamlined:
+http://theandystratton.com/2012/how-to-bypass-google-chromes-javascript-popup-blocker
