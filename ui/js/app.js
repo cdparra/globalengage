@@ -76,7 +76,7 @@ $(document).on("ready", function () {
 
 function openEvent(event) {
 	if (event == "event1") {
-		window.open("https://hangoutsapi.talkgadget.google.com/hangouts/_/72cpil68rhse9op5892b6mk5k4?authuser=0");
+		window.open("https://hangoutsapi.talkgadget.google.com/hangouts/_/7acpihhc520bk8snf8ef8qkslk?authuser=0");
 	} else {
 		$('#myModal').modal({ show : "true" });
 	}
