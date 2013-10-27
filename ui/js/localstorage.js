@@ -1,16 +1,11 @@
 // JavaScript Document
 var storage = $.localStorage;
 
-function SetBaseUrl(baseUrl) {
-    storage.set('baseUrl', baseUrl);
+function SetUserCode(code) {
+    storage.set('userCode', code);
 }
 
-function GetBaseUrl() {
-    return storage.get('baseUrl');
-}
-
-function SetSessionKey(Key)
-{
-	storage.set('sessionKey',Key);
+function GetUserCode() {
+    return storage.get('userCode');
 }
 
