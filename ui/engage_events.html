@@ -10,25 +10,38 @@
     <script src="lib/jquery-2.0.3.min.js" type="text/javascript"></script>
     <script src="lib/jquery.metro-btn.js" type="text/javascript"></script>
     <script src="lib/jquery.storageapi.min.js"></script>
+    <script src="lib/bootstrap.min.js" type="text/javascript"></script>
     <script src="js/localstorage.js"></script>
     <script src="js/app.js"></script>
 </head>
 <body>
     <div class="container">
-    <div style="float:left;">
-        <h2> Hello Joe! Here is what's going on <span class="text-success">Today</span></h2>
+	    <div style="float:left;">
+	        <h2> Hello <span class="text-success" id="fullname">Joe</span> Here is what's going on <span class="text-success">Today</span></h2>
+	    </div>
+	    <div style="float:right; margin-top:20px;">
+	        <a class="btn" onclick="refreshActivities()"><i class="icon-refresh"></i> See other activities</a>
+	        <a class="btn" href="index.html"><i class="icon-off"></i> Logout</a>
+	    </div>
+	    
+	    <div id="today" class="metro-panel"></div>
+	    
+	    <div id="today-extra" class="metro-panel" style="display: none;"></div>
+	    <div id="jane" class="metro-panel" style="display: none;"></div>
+	    
+	    <!-- Modal -->
+		<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-header">
+		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		    <h2 id="myModalLabel">This activity is yet to begin!</h3>
+		  </div>
+		  <div class="modal-body" style="font-size:20px;">
+		    <p>The activity you have requested hasn't started yet. Come back in a couple of hours to see online and participate in it</p>
+		  </div>
+		  <div class="modal-footer">
+		    <button class="btn" data-dismiss="modal" aria-hidden="true">Come back Later!</button>
+		  </div>
+		</div>
     </div>
-    
-    <div style="float:right; margin-top:20px;">
-    
-        <a class="btn" onclick="refreshActivities()"><i class="icon-off"></i> See other activities</a>
-        <a class="btn" href="index.html"><i class="icon-off"></i> Logout</a>
-    </div>
-    
-    <div id="today" class="metro-panel"></div>
-    
-    <div id="today-extra" class="metro-panel" style="display: none;"></div>
-    <div id="jane" class="metro-panel" style="display: none;"></div>
-</div>
 </body>
 </html>

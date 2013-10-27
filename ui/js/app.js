@@ -8,11 +8,11 @@ var app = {
 
 $(document).on("ready", function () {
 	
-		var event1 = 'Disussion Group: "LeadingAge Hackfest". <b>Ongoing... JOIN Now!</p> <br> by <i>LeadingAge Organization</i>';
+		var event1 = 'Disussion Group: "LeadingAge Hackfest". <b>Ongoing... JOIN Now!</b> <br> by <i>LeadingAge Organization</i>';
 		var event2 = 'Book Discussion: "Crime and Punishment" at <b>11am</b><br> by <i>LeadingAge Organization</i>';
 		var event3 = 'Religious Service with Rvd. Jones at <b>12pm</b>. <br> by <i>LeadingAge Organization</i>';
 		var event4 = 'Diabetes Talk with Dr. Rosenberg at <b>4pm</b><br> by <i>LeadingAge Organization</i>';
-		var event5 = 'Discussion Group: "Obamacare" at <b>5pm</p> <br> by <i>Robson Ranch, Denton, TX</i>';
+		var event5 = 'Discussion Group: "Obamacare" at <b>5pm</b> <br> by <i>Robson Ranch, Denton, TX</i>';
 		var event6 = 'Singing Lessons with Prof. Simpson at <b>6pm</b><br> by <i>Heritage Ranch, Fairview, TX</i>';
 		
 		
@@ -20,7 +20,7 @@ $(document).on("ready", function () {
 		var event8 = 'Book Discussion: "The little Prince" <b>11am</b> <br> by <i>LeadingAge Organization</i>';
 		var event9 = 'Disussion Group: "Technology and Ageing. What can we do about it this summer?". <b>Starting at 3pm</p> <br> by <i>LeadingAge Organization</i>';
 		var event10 = 'Singing Lessons with Prof. Simpson. <b>6pm</b> <br> <i>Heritage Ranch Retirement Community</i>';
-		var event11 = 'Game Tournament: "Chess Tournament" <b>5pm</p> <br> <i>Heritage Ranch Retirement Community</i>';
+		var event11 = 'Game Tournament: "Chess Tournament" <b>5pm</b> <br> <i>Heritage Ranch Retirement Community</i>';
 		var event12 = 'Diabetes Talk with Dr. Rosenberg. <b>4pm</b> <br> <i>Heritage Ranch Retirement Community</i>';
 
 
@@ -62,6 +62,7 @@ $(document).on("ready", function () {
 				$("#today").hide();
 				$("#today-extra").hide();
 				$("#jane").show();
+				$("#fullname").text("Jane");
 			}
 			
     /*app.router = new app.routers.AppRouter();
@@ -77,7 +78,7 @@ function openEvent(event) {
 	if (event == "event1") {
 		window.open("https://hangoutsapi.talkgadget.google.com/hangouts/_/72cpil68rhse9op5892b6mk5k4?authuser=0");
 	} else {
-		//create a modal window
+		$('#myModal').modal({ show : "true" });
 	}
 	
 	
