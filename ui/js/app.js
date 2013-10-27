@@ -30,7 +30,7 @@ function openEvent(date,title) {
 	    type: "GET",
 	    url: GetBaseUrl() + date+"-"+title+".json",
            	//url: "http://test.reminiscens.me/lifeapi/context/person/"+GetPersonId(),
-			beforeSend: function (request)
+//			beforeSend: function (request)
 //	    	{
 //	    	   request.setRequestHeader("PLAY_SESSION", GetSessionKey());
 //	    	},
