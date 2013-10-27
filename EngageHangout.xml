@@ -894,7 +894,7 @@ cellspacing="2">
     </tr>
     <tr align="center">
       <td style="vertical-align: top;">
-        <span style="font-family: Verdana; font-size:18px"> Dicussion Group: LeadingAge HackFest </span><br>
+        <span style="font-family: Verdana; font-size:14px"> Dicussion Group: LeadingAge HackFest </span><br>
       </td>
     </tr>
     <tr style="font-weight: bold;" align="center">
@@ -908,8 +908,8 @@ cellspacing="2">
     </tr>
     <tr align="center">
       <td style="vertical-align: top;" bgcolor="#eeeeee">
-        <p style="font-size: 18px;">
-          Welcome to the discussion session for LeadingAge HackFest. We will talk about the benefits of technology for the aging population and how we can best harness them.
+        <p style="font-size: 14px;">
+          Welcome to the discussion session for LeadingAge HackFest!<br> We will talk about the benefits of technology for the aging population and how we can best harness them.
         </p>
         <br> 
       </td>
