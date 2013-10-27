@@ -43,7 +43,8 @@ function openEvent(date,title) {
 			success: function(data) 
 			{	
 				var hangoutUrl = data.url;
-				var w window.open(hangoutUrl);
+				var w = window.open(hangoutUrl);
+				//w.getURL
             }  	
    		});
 		
@@ -51,7 +52,7 @@ function openEvent(date,title) {
 }
 
 function GetBaseUrl() {
-	return "http://globalengage.co.nf/hangouts/";
+	return "http://globalengage.co.nf/api/hangouts/";
 	//return "http://test.lifeparticipation.org/globalengage/hangouts/";
 }
 
