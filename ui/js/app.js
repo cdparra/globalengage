@@ -43,7 +43,7 @@ function openEvent(date,title) {
 			success: function(data) 
 			{	
 				var hangoutUrl = data.url;
-				window.open(hangoutUrl);
+				var w window.open(hangoutUrl);
             }  	
    		});
 		
