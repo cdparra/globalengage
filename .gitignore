@@ -1,0 +1,62 @@
+# OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+
+# Vim ignore
+
+*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# SublimeText project files
+*.sublime-workspace
+
+# Eclipse Ignore Files
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+
+# Java ignores
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
