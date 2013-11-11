@@ -961,35 +961,112 @@ function init() {
       function(eventObj) {
         if (eventObj.isApiReady) {
           console.log("getting the hangoutURL");
-            hangoutURL();
+          sendHangoutUrlNoPort();
         }
       });
 }
 
-function hangoutURL() {
-  
-  var url = gapi.hangout.getHangoutUrl();
-  console.log("The hangoutURL original: " + url);
-  var url2 = url.replace(/\//g,"%2f");
-  console.log("The hangoutURL step 1: " + url2);
-  var url3 = url2.replace(/\./g,"%2e");
-  console.log("The hangoutURL step 2: " + url3);
+// Send Hangout URL to Webdis virtual host server 
+function sendHangoutUrlNoPort() {
+	var hangoutURL = getHangoutUrlEncodedForWebdis();
+    var eventKey = getEventKey(); 
+    setHangoutURLInWebdisServerNoPort(eventKey,hangoutURL);
+}
 
-  var redisServer = "http://test.lifeparticipation.org:7379/SET/globalengage/"+url3;
+// Send Hangout URL to Webdis virtual "naked" server (with the port)
+function sendHangoutUrl() {
+	var hangoutURL = getHangoutUrlEncodedForWebdis();
+    var eventKey = getEventKey(); 
+    setHangoutURLInWebdisServer(eventKey,hangoutURL);
+}
 
-  // SET the Hangout URL in a simple redis key-value server under the key "globalengage"
-  // Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
+
+// TODO: in the real app, replace "globalengage" by a key identifying the event
+function getEventKey() {
+	return "globalengage";
+}
+
+// SET the Hangout URL in a simple redis key-value server under the key "globalengage"
+function setHangoutURLInWebdisServer(eventKey,hangoutUrl) {
+  var webdisCommand = getWebdisCommandString("SET",eventKey,hangoutUrl);
+  var webdisServerUrl = getRedisServerUrl();
+  sendWebdisRequestViaPost(webdisCommand,webdisServerUrl,false);
+}
+
+// SET the Hangout URL in a simple redis key-value server under the key "globalengage"
+// using URL in VHOST (to avoid proxy limiting special ports access)
+function setHangoutURLInWebdisServerNoPort(eventKey,hangoutUrl) {  
+	var webdisCommand = getWebdisCommandString("SET",eventKey,hangoutUrl);
+  	var webdisServerUrl = getRedisServerUrlNoPort();
+	sendWebdisRequestViaPost(webdisCommand,webdisServerUrl,true);
+}
+
+
+function sendWebdisRequest(command,server,retry) {
   $.ajax({
     type: "GET",
-	url: redisServer,
+	url: server+command,
     error: function (data) {
       console.log("couldn't set hangout url");
+      if(retry) {
+      	console.log("Retrying with the NOPort url couldn't set hangout url");
+      	sendHangoutUrl();
+      }
     },
 	success: function(data) {	
       console.log("hangout url already on server"+data.SET);
     }
   });
 }
+
+function sendWebdisRequestViaPost(command,server,retry) {
+  $.ajax({
+    type: "POST",
+	url: server,
+	data: command,
+	dataType: "text",
+    error: function (data) {
+      console.log("couldn't set hangout url, trying GET request");
+      sendWebdisRequest(command,server,retry);
+    },
+	success: function(data) {	
+      console.log("hangout url already on server"+data.SET);
+    }
+  });
+}
+
+function getRedisServerUrl() {
+	return "http://test.lifeparticipation.org:7379/";
+}
+
+function getRedisServerUrlNoPort() {
+	return "http://test.lifeparticipation.org/webdis/";
+}
+
+// The request to the webdis front-end SET/<key>/<value>
+// TODO: In the real app, <key> should be some sort of hashcode identifying the hangout, 
+// 		 sent by the community web app once the event is started
+// Example: 
+// SET/globalengage/http:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
+// Always replace '/' by %2f and '.' by %2e if the value is an url
+function getWebdisCommandString(command,key,value) {
+	return command+"/"+key+"/"+value;
+}
+
+function getHangoutUrlEncodedForWebdis() {
+	var url = gapi.hangout.getHangoutUrl();
+ 	console.log("The hangoutURL original: " + url);
+ 
+ 	url = url.replace(/\//g,"%2f");
+ 	console.log("The hangoutURL step 1: " + url);
+ 
+  	url = url.replace(/\./g,"%2e");
+  	console.log("The hangoutURL step 2: " + url);
+
+  	return url;
+}
+
+
 
 gadgets.util.registerOnLoadHandler(init);
 

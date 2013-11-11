@@ -77,46 +77,104 @@ $(document).on("ready", function () {
 function openEvent(event) {
 	// TODO: eventually, the event keyword should be used to get the HangoutURL
 	if (event == "event1") {
-		var hangoutUrl = GetHangoutUrl();
-		window.open(hangoutUrl);
+		var hangoutUrl = GetHangoutUrlNoPort();
 	} else {
 		$('#myModal').modal({ show : "true" });
 	}
 	
 }
 
+// Get the Hangout URL from a simple redis key-value server
+// Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
 function GetHangoutUrl() {
-
-	// Get the Hangout URL from a simple redis key-value server
-	// Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
-		$.ajax({
+	$.ajax({
 	    type: "GET",
-	    url: GetBaseUrl(),
-//           	//url: "http://test.reminiscens.me/lifeapi/context/person/"+GetPersonId(),
-////			beforeSend: function (request)
-////	    	{
-////	    	   request.setRequestHeader("PLAY_SESSION", GetSessionKey());
-////	    	},
-//          processData: false,
-//          dataType: "json",
-//			contentType:"application/json",
-        	error: function (data) {
-        	    console.log("couldn't get hangout url");
-        	    return "https://hangoutsapi.talkgadget.google.com/hangouts/_/7ecpi517rtv7ptinkosji25gfo";
-        	},
-			success: function(data) 
-			{	
-				console.log("Received Data: "+data.GET);
-				var hangoutUrl = data.GET;
-				var w = window.open(hangoutUrl);            }  	
-   		});
-		
-
+	    url: GetBaseUrl()+GetRequestString(),
+        error: function (data) {
+			console.log("couldn't get hangout url");
+		},
+		success: function(data) {	
+			console.log("Received Data: "+data.GET);
+			var hangoutUrl = data.GET;
+			var w = window.open(hangoutUrl);            
+		}  	
+   	});
 }
+
+// Get the Hangout URL from a simple redis key-value server
+// Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
+function GetHangoutUrlNoPort() {
+	$.ajax({
+	    type: "GET",
+	    url: GetBaseUrlNoPort()+GetRequestString(),
+        error: function (data) {
+			console.log("couldn't get hangout url, trying with url with PORT");
+			GetHangoutUrl();
+		},
+		success: function(data) {	
+			console.log("Received Data: "+data.GET);
+			var hangoutUrl = data.GET;
+			var w = window.open(hangoutUrl);            
+		}  	
+   	});
+}
+
+// Get the Hangout URL from a simple redis key-value server
+// Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
+function GetHangoutUrlPOST() {
+	$.ajax({
+	    type: "POST",
+	    url: GetBaseUrl(),
+	    data: GetRequestString(),
+	    dataType: "text", 
+        error: function (data) {
+			console.log("couldn't get hangout url, trying with the GET request");
+			GetBaseUrlNoPort();
+		},
+		success: function(data) {	
+			console.log("Received Data: "+data.GET);
+			var hangoutUrl = data.GET;
+			var w = window.open(hangoutUrl);            
+		}  	
+   	});
+}
+
+// Get the Hangout URL from a simple redis key-value server
+// Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
+function GetHangoutUrlPOSTNoPort() {
+	$.ajax({
+	    type: "POST",
+	    url: GetBaseUrlNoPort(),
+	    data: GetRequestString(),
+	    dataType: "text",
+        error: function (data) {
+			console.log("couldn't get hangout url, trying with the URL + port");
+			GetHangoutUrlPOST();
+		},
+		success: function(data) {	
+			console.log("Received Data: "+data.GET);
+			var hangoutUrl = data.GET;
+			var w = window.open(hangoutUrl);            
+		}  	
+   	});
+}
+
 
 function GetBaseUrl() {
 	//return "http://globalengage.co.nf/api/hangouts/";
-	return "http://test.lifeparticipation.org:7379/GET/globalengage";
+	return "http://test.lifeparticipation.org:7379/";
+}
+
+function GetBaseUrlNoPort() {
+	//return "http://globalengage.co.nf/api/hangouts/";
+	return "http://test.lifeparticipation.org/webdis/";
+}
+
+// The request to the webdis front-end GET/<key>
+// In the real app, <key> should be some sort of hashcode identifying the hangout
+// Example: GET/globalengage
+function GetRequestString() {
+	return "GET/globalengage"
 }
 
 function refreshActivities() {
