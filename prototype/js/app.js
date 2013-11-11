@@ -16,8 +16,8 @@ $(document).on("ready", function () {
 		var event6 = 'Singing Lessons with Prof. Simpson at <b>6pm</b><br> by <i>Heritage Ranch, Fairview, TX</i>';
 		
 		
-		var event7 = 'Religious Service with Rvd. Jones <b>9am</b>. <br> <i>Heritage Ranch Retirement Community</i>';
-		var event8 = 'Book Discussion: "The little Prince" <b>11am</b> <br> by <i>LeadingAge Organization</i>';
+		var event7 = 'Religious Service with Rvd. Jones <b>Ongoing... JOIN Now!</b>. <br> by <i>LeadingAge Organization</i>';
+		var event8 = 'Book Discussion: "The little Prince" <b>11am</b> <br> by <i>Heritage Ranch Retirement Community</i>';
 		var event9 = 'Disussion Group: "Technology and Ageing. What can we do about it this summer?". <b>Starting at 3pm</p> <br> by <i>LeadingAge Organization</i>';
 		var event10 = 'Singing Lessons with Prof. Simpson. <b>6pm</b> <br> <i>Heritage Ranch Retirement Community</i>';
 		var event11 = 'Game Tournament: "Chess Tournament" <b>5pm</b> <br> <i>Heritage Ranch Retirement Community</i>';
