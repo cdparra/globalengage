@@ -968,15 +968,25 @@ function init() {
 
 function hangoutURL() {
   
-  var info = gapi.hangout.getHangoutUrl();
-  console.log("hangoutURL_func-getting the hangoutURL:" + info);
+  var url = gapi.hangout.getHangoutUrl();
+  console.log("The hangoutURL original: " + url);
+  var url2 = url.replace(/\//g,"%2f");
+  console.log("The hangoutURL step 1: " + url2);
+  var url3 = url2.replace(/\./g,"%2e");
+  console.log("The hangoutURL step 2: " + url3);
 
+  var redisServer = "http://test.lifeparticipation.org:7379/SET/globalengage/"+url3;
+
+  // SET the Hangout URL in a simple redis key-value server under the key "globalengage"
+  // Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
   $.ajax({
-    url: "http://api.openkeyval.org/store/",
-    data: "url=" + info + "&eventname=event1",
-    dataType: "jsonp",
-    success: function(data){
-      console.log("Saved "+data);
+    type: "GET",
+	url: redisServer,
+    error: function (data) {
+      console.log("couldn't set hangout url");
+    },
+	success: function(data) {	
+      console.log("hangout url already on server"+data.SET);
     }
   });
 }

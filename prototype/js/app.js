@@ -75,42 +75,48 @@ $(document).on("ready", function () {
 
 
 function openEvent(event) {
+	// TODO: eventually, the event keyword should be used to get the HangoutURL
 	if (event == "event1") {
-		window.open("https://hangoutsapi.talkgadget.google.com/hangouts/_/7ecpi517rtv7ptinkosji25gfo");
+		var hangoutUrl = GetHangoutUrl();
+		window.open(hangoutUrl);
 	} else {
 		$('#myModal').modal({ show : "true" });
 	}
 	
-	
-	// Get the Hangout URL 
-//		$.ajax({
-//	    type: "GET",
-//	    url: GetBaseUrl() + event+".json",
+}
+
+function GetHangoutUrl() {
+
+	// Get the Hangout URL from a simple redis key-value server
+	// Example: GET http://test.lifeparticipation.org:7379/SET/globalengage/https:%2f%2fhangoutsapi%2etalkgadget%2egoogle%2ecom%2fhangouts%2f_%2f7ecpi517rtv7ptinkosji25gfo 
+		$.ajax({
+	    type: "GET",
+	    url: GetBaseUrl(),
 //           	//url: "http://test.reminiscens.me/lifeapi/context/person/"+GetPersonId(),
 ////			beforeSend: function (request)
 ////	    	{
 ////	    	   request.setRequestHeader("PLAY_SESSION", GetSessionKey());
 ////	    	},
-//            processData: false,
-//            dataType: "json",
+//          processData: false,
+//          dataType: "json",
 //			contentType:"application/json",
-//        	error: function (data) {
-//        	    alert("create a modal window with info about the event but no join button");
-//        	},
-//			success: function(data) 
-//			{	
-//				var hangoutUrl = data.url;
-//				var w = window.open(hangoutUrl);
-//				//w.getURL
-//            }  	
-//   		});
+        	error: function (data) {
+        	    console.log("couldn't get hangout url");
+        	    return "https://hangoutsapi.talkgadget.google.com/hangouts/_/7ecpi517rtv7ptinkosji25gfo";
+        	},
+			success: function(data) 
+			{	
+				console.log("Received Data: "+data.GET);
+				var hangoutUrl = data.GET;
+				var w = window.open(hangoutUrl);            }  	
+   		});
 		
 
 }
 
 function GetBaseUrl() {
 	//return "http://globalengage.co.nf/api/hangouts/";
-	//return "http://test.lifeparticipation.org/globalengage/hangouts/";
+	return "http://test.lifeparticipation.org:7379/GET/globalengage";
 }
 
 function refreshActivities() {
